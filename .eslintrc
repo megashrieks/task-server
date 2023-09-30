@@ -1,0 +1,29 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+		"@typescript-eslint",
+		"unused-imports"
+  ],
+  "extends": [
+	  "eslint:recommended",
+	  "plugin:@typescript-eslint/eslint-recommended",
+	  "plugin:@typescript-eslint/recommended"
+  ],
+  "ignorePatterns": ["**/node_modules/", "**/dist/", "**/tst/"],
+
+  "rules": {
+	  "@typescript-eslint/no-explicit-any": "off",
+	  "unused-imports/no-unused-imports-ts": 1,
+	  "no-unused-vars": "off",
+	  "@typescript-eslint/no-unused-vars": [
+		  "warn", // or "error"
+		  { 
+			  "argsIgnorePattern": "^_",
+			  "varsIgnorePattern": "^_",
+			  "caughtErrorsIgnorePattern": "^_"
+		  }
+	  ],
+	  "quotes": [2, "single"]
+  }
+}

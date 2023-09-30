@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+
+    environment:
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_USERNAME: 'postgres'
+
+    volumes:
+      - ./drizzle:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  app:
+    container_name: task-api
+    build: .
+
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    links:
+      - db
+
+    environment:
+      PORT: 8000
+      ENVIRONMENT: 'local'
+      DATABASE_HOST: 'db'
+      DATABASE_PORT: "5432"
+      DATABASE_SCHEMA: 'public'
+      DATABASE_USERNAME: 'postgres'
+      DATABASE_PASSWORD: 'password'
+      DATABASE_NAME: 'postgres'
+
